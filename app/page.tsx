@@ -4,7 +4,7 @@ import { ProductsGroupList } from "@/components/fragments/products-group-list";
 export default function Home() {
   return (
     <>
-      <Container className="mt-10">
+      <Container className="my-10">
         <Title text="Пиццы" size="lg" className="font-extrabold" />
       </Container>
       <TopBar />

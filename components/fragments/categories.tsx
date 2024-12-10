@@ -2,7 +2,9 @@
 
 import { cn } from "@/lib/utils";
 import { useCategoryStore } from "@/store/category";
-import React from "react";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface Props {
   className?: string;
@@ -16,33 +18,62 @@ const cats = [
   { id: 5, name: "Коктейли" },
   { id: 6, name: "Кофе" },
   { id: 7, name: "Напитки" },
-  /*   { id: 8, name: "Десерты" }, */
-  /*   { id: 9, name: "Любят дети" }, */
   { id: 10, name: "Соусы" },
-  /*   { id: 11, name: "Другие товары" },
-  { id: 12, name: "Акции" }, */
 ];
 
 export const Categories: React.FC<Props> = ({ className }) => {
   const categoryActiveId = useCategoryStore((state) => state.activeId);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 262) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div
-      className={cn("inline-flex gap-1 bg-gray-50 p-1 rounded-2xl", className)}
+      className={cn(
+        "relative inline-flex items-center overflow-hidden",
+        className
+      )}
     >
-      {cats.map(({ name, id }, index) => (
-        <a
-          className={cn(
-            "flex items-center font-medium h-11 rounded-2xl px-5",
-            categoryActiveId === id &&
-              "bg-white shadow-md shadow-gray-200 text-primary"
-          )}
-          key={index}
-          href={`/#${name}`}
-        >
-          <button>{name}</button>
-        </a>
-      ))}
+      <motion.div
+        className="absolute left-0"
+        initial={{ x: -100, opacity: 0 }}
+        animate={isScrolled ? { x: 0, opacity: 1 } : { x: -100, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Image src="/dodo-logo.png" alt="logo" width={35} height={35} />
+      </motion.div>
+      <motion.div
+        className="flex gap-6 items-center"
+        initial={{ marginLeft: 0 }}
+        animate={{ marginLeft: isScrolled ? "50px" : "0px" }}
+        transition={{ duration: 0.3 }}
+      >
+        {cats.map(({ name, id }, index) => (
+          <a
+            className={cn(
+              "flex items-center font-bold text-sm py-3.5",
+              categoryActiveId === id && "text-primary"
+            )}
+            key={index}
+            href={`/#${name}`}
+          >
+            <button>{name}</button>
+          </a>
+        ))}
+      </motion.div>
     </div>
   );
 };

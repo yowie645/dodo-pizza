@@ -10,7 +10,8 @@ const comfortaa = Comfortaa({
 });
 
 export const metadata: Metadata = {
-  title: "Dodo pizza",
+  title:
+    "Пицца — заказать с доставкой на дом бесплатно, доставка еды и напитков", //todo сделать с привязкой к определенному городу Пицца МСК и т.д
 };
 
 export default function RootLayout({
