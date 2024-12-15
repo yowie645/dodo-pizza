@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FilterChecboxProps, FilterCheckbox } from "./filter-checkbox";
-import { Input } from "../ui";
+import { Input, Skeleton } from "../ui";
 
 type Item = FilterChecboxProps;
 
@@ -10,6 +10,7 @@ interface Props {
   items: Item[];
   defaultItems: Item[];
   limit?: number;
+  loading?: boolean;
   searchInputPlaceholder?: string;
   onChange?: (values: string[]) => void;
   defaultValue?: string[];
@@ -22,6 +23,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   defaultItems,
   limit = 5,
   searchInputPlaceholder = "Поиск...",
+  loading,
   onChange,
   defaultValue,
   className,
@@ -38,6 +40,17 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
+
+  if (loading) {
+    return (
+      <div className={className}>
+        <p className="font-bold mb-3">{title}</p>
+        {...[...new Array(limit)].map((_, index) => {
+          return <Skeleton key={index} className="h-8 mb-3 rounded-[8px]" />;
+        })}
+      </div>
+    );
+  }
   return (
     <div className={className}>
       <p className="font-medium mb-3">{title}</p>

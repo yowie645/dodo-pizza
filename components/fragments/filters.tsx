@@ -1,15 +1,23 @@
+"use client";
 import React from "react";
 import { Title } from "./title";
 import { FilterCheckbox } from "./filter-checkbox";
 import { Input } from "../ui";
 import { RangeSlider } from "./range-slider";
 import { CheckboxFiltersGroup } from "./checkbox-filters-group";
+import { useFilterIngredients } from "@/hooks/useIngredients";
 
 interface Props {
   className?: string;
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
+  const { ingredients, loading } = useFilterIngredients();
+
+  const items = ingredients.map((item) => ({
+    value: String(item.id),
+    text: item.name,
+  }));
   return (
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-medium" />
@@ -38,48 +46,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
         title="Ингредиенты"
         className="mt-5"
         limit={5}
-        defaultItems={[
-          { text: "Пряная грудинка", value: "1" },
-          { text: "Моцарелла", value: "1" },
-          { text: "Чеддер и пармезан", value: "1" },
-          { text: "Халапенью", value: "1" },
-          { text: "Нежный ципленок", value: "1" },
-          { text: "Шампиньоны", value: "1" },
-          { text: "Бекон", value: "1" },
-          { text: "Ветчина", value: "1" },
-          { text: "Пеперони", value: "1" },
-          { text: "Чоризо", value: "1" },
-          { text: "Маринованные огурчики", value: "1" },
-          { text: "Свежие томаты", value: "1" },
-          { text: "Красный лук", value: "1" },
-          { text: "Сочные ананасы", value: "1" },
-          { text: "Итальянские травы", value: "1" },
-          { text: "Сладкий перец", value: "1" },
-          { text: "Митболы", value: "1" },
-          { text: "Баварские колбаски", value: "1" },
-          { text: "Креветки", value: "1" },
-        ]}
-        items={[
-          { text: "Пряная грудинка", value: "1" },
-          { text: "Моцарелла", value: "1" },
-          { text: "Чеддер и пармезан", value: "1" },
-          { text: "Халапенью", value: "1" },
-          { text: "Нежный ципленок", value: "1" },
-          { text: "Шампиньоны", value: "1" },
-          { text: "Бекон", value: "1" },
-          { text: "Ветчина", value: "1" },
-          { text: "Пеперони", value: "1" },
-          { text: "Чоризо", value: "1" },
-          { text: "Маринованные огурчики", value: "1" },
-          { text: "Свежие томаты", value: "1" },
-          { text: "Красный лук", value: "1" },
-          { text: "Сочные ананасы", value: "1" },
-          { text: "Итальянские травы", value: "1" },
-          { text: "Сладкий перец", value: "1" },
-          { text: "Митболы", value: "1" },
-          { text: "Баварские колбаски", value: "1" },
-          { text: "Креветки", value: "1" },
-        ]}
+        defaultItems={items.slice(0, 6)}
+        items={items}
+        loading={loading}
       />
     </div>
   );
