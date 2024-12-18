@@ -17,7 +17,7 @@ export const Header: React.FC<Props> = ({ className }) => {
       <Container className="flex items-center justify-between py-8">
         {/* left side */}
         <Link href="/">
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <Image src="/dodo-logo.png" alt="logo" width={40} height={40} />
 
             <div className="flex gap-1 flex-col">
@@ -29,7 +29,7 @@ export const Header: React.FC<Props> = ({ className }) => {
             </div>
           </div>
         </Link>
-
+        {/* center side */}
         <div className="mx-10 flex-1">
           <SearchInput />
         </div>
