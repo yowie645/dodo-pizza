@@ -23,7 +23,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
   const updatePrices = (prices: number[]) => {
     filters.setPrices('priceFrom', prices[0]);
-    filters.setPrices('priceTo', prices[0]);
+    filters.setPrices('priceTo', prices[1]);
   };
 
   return (
