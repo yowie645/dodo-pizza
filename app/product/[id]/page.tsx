@@ -36,10 +36,11 @@ export default async function ProductPage({
             maiores dolores!
           </p>
           <GroupVariants
+            selectedValue='2'
             items={[
               { name: 'Маленькая', value: '1' },
               { name: 'Средняя', value: '2' },
-              { name: 'Большая', value: '3' },
+              { name: 'Большая', value: '3', disabled: true },
             ]}
           />
         </div>
