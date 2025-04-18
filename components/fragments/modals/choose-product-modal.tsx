@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Product } from '@prisma/client';
 import { cn } from '@/lib/utils';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Title } from '../title';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   product: Product;
@@ -13,23 +14,11 @@ interface Props {
 
 export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (product) {
-      setIsOpen(true);
-    }
-  }, [product]);
-
-  const handleClose = () => {
-    setIsOpen(false);
-    router.back();
-  };
 
   return (
     <Dialog
-      open={isOpen}
-      onOpenChange={handleClose}>
+      open={Boolean(product)}
+      onOpenChange={() => router.back()}>
       <DialogContent
         className={cn(
           'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden',

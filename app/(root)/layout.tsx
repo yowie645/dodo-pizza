@@ -1,10 +1,9 @@
+import { Header } from '@/components/fragments';
 import type { Metadata } from 'next';
 
-import { Header } from '@/components/fragments/header';
-
 export const metadata: Metadata = {
-  title:
-    'Пицца — заказать с доставкой на дом бесплатно, доставка еды и напитков', //todo сделать с привязкой к определенному городу Пицца МСК и т.д
+  title: 'Next Pizza | Главная',
+  description: 'Закажи пиццу, браток',
 };
 
 export default function HomeLayout({
