@@ -1,8 +1,7 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
 import { Title } from './title';
 import { Button } from '../ui';
-import Image from 'next/image';
 import { PizzaImage } from './pizza-image';
 
 interface Props {

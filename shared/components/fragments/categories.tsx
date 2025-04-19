@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/lib/utils';
-import { useCategoryStore } from '@/store/category';
+import { cn } from '@/shared/lib/utils';
+import { useCategoryStore } from '@/shared/store/category';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';

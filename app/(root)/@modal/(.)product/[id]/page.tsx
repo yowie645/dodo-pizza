@@ -1,4 +1,4 @@
-import { ChooseProductModal } from '@/components/fragments';
+import { ChooseProductModal } from '@/shared/components/fragments';
 import { prisma } from '@/prisma/prisma-client';
 import { notFound } from 'next/navigation';
 

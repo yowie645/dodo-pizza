@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
-import { Categories, Container } from '@/components/fragments';
+import { Categories, Container } from '@/shared/components/fragments';
 import { ArrowRight, ShoppingBasket } from 'lucide-react';
 import { Button } from '../ui';
 import { Category } from '@prisma/client';

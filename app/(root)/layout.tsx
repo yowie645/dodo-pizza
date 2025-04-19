@@ -1,4 +1,4 @@
-import { Header } from '@/components/fragments';
+import { Header } from '@/shared/components/fragments';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

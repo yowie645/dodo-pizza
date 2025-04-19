@@ -3,7 +3,7 @@ import {
   GroupVariants,
   ProductImage,
   Title,
-} from '@/components/fragments';
+} from '@/shared/components/fragments';
 import { prisma } from '@/prisma/prisma-client';
 import { notFound } from 'next/navigation';
 
