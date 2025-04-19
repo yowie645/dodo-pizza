@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 import { useRouter } from 'next/navigation';
+import { Title } from '../title';
+import { ChoosePizzaForm } from '../choose-pizza-form';
 
 interface Props {
   product: Product;
@@ -18,7 +20,7 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
   useEffect(() => {
     if (product) {
       setIsOpen(true);
-      router.push(`/product/${product.id}`); // проблема модальное окно открывалось но url при этом не обновлялся выглядит как костыль, позже исправлю
+      router.push(`/product/${product.id}`); // модальное окно открывалось но url при этом не обновлялся, это решение выглядит как костыль, позже исправлю
     }
   }, [product, router]);
 
@@ -36,7 +38,11 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
           'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden',
           className
         )}>
-        <h1>{product.name}</h1>
+        <ChoosePizzaForm
+          imageUrl={product.imageUrl}
+          name={product.name}
+          ingredients={[]}
+        />
       </DialogContent>
     </Dialog>
   );
