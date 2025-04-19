@@ -28,7 +28,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   return (
     <div className={cn(className, 'flex flex-1')}>
       <PizzaImage
-        imageUrl={''}
+        imageUrl={imageUrl}
         size={size}
       />
 

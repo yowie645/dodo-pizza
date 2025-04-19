@@ -6,7 +6,6 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
 import { ChooseProductForm } from '../choose-product-form';
 import { ChoosePizzaForm } from '../choose-pizza-form';
-import { ProductItem } from '@prisma/client';
 import { ProductWithRelations } from '@/@types/prisma';
 
 interface Props {
@@ -18,10 +17,8 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(product.items);
-  const firstItem = product?.items?.[0];
-  console.log(firstItem);
-  const isPizzaForm = Boolean(firstItem?.pizzaType);
+  const firstItem = product.items[0];
+  const isPizzaForm = Boolean(firstItem.pizzaType);
 
   useEffect(() => {
     if (product) {
@@ -45,7 +42,12 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
           className
         )}>
         {isPizzaForm ? (
-          <h1>pizzaz</h1>
+          <ChoosePizzaForm
+            imageUrl={product.imageUrl}
+            name={product.name}
+            ingredients={product.ingredients}
+            items={product.items}
+          />
         ) : (
           <ChooseProductForm
             imageUrl={product.imageUrl}
