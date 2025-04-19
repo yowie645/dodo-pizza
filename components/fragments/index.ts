@@ -8,7 +8,7 @@ export { FilterCheckbox } from './filter-checkbox';
 export { Filters } from './filters';
 export { RangeSlider } from './range-slider';
 export { SearchInput } from './search-input';
-export { ProductImage } from './product-image';
+export { PizzaImage } from './pizza-image';
 export { GroupVariants } from './group-variants';
 export { ChooseProductForm } from './choose-product-form';
 export * from './modals';

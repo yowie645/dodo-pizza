@@ -3,33 +3,35 @@ import React from 'react';
 import { Title } from './title';
 import { Button } from '../ui';
 import Image from 'next/image';
+import { PizzaImage } from './pizza-image';
 
 interface Props {
   imageUrl: string;
   name: string;
+  ingredients: unknown[];
+  items?: unknown[];
   onClickAdd?: VoidFunction;
   className?: string;
 }
 
-export const ChooseProductForm: React.FC<Props> = ({
+export const ChoosePizzaForm: React.FC<Props> = ({
   imageUrl,
   name,
+  ingredients,
+  items,
   onClickAdd,
   className,
 }) => {
   const textDetaills = '30 см, традиционное тесто 30';
   const totalPrice = '350';
+  const size = 30;
   return (
     <div className={cn(className, 'flex flex-1')}>
-      <div className='flex items-center justify-center flex-1 relative w-full'>
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={350}
-          height={350}
-          className='relative left-2 top-2 transition-all z-10 duration-300'
-        />
-      </div>
+      <PizzaImage
+        imageUrl={''}
+        size={size}
+      />
+
       <div className='w-[490px] bg-[#fcfcfc] p-7'>
         <Title
           text={name}
