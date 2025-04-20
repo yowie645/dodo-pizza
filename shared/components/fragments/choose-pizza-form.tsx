@@ -10,6 +10,7 @@ import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
 import { ProductItem } from '@prisma/client';
 import { IngredientItem } from './ingredient-item';
 import { Ingredient } from '@prisma/client';
+import { useSet } from 'react-use';
 
 interface Props {
   name: string;
@@ -18,7 +19,7 @@ interface Props {
   defaultImageUrl: {
     imageUrl: string;
   };
-  onClickAdd: () => void; // было VoidFunction
+  onClickCart: () => void; // было VoidFunction
   className?: string;
 }
 
@@ -27,7 +28,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   ingredients,
   items,
   defaultImageUrl,
-  onClickAdd,
+  onClickCart,
   className,
 }) => {
   const [size, setSize] = React.useState<PizzaSize>(25);
@@ -40,6 +41,10 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     type === 1 ? 'традиционное' : 'тонкое'
   } тесто`;
   const totalPrice = currentItem?.price?.toFixed(0) || '0';
+
+  const [selectedIngredients, { toggle: toggleIngredients }] = useSet<number>(
+    new Set([])
+  );
 
   return (
     <div className={cn(className, 'flex flex-1')}>
@@ -70,21 +75,22 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         </div>
 
         <div className='bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar mt-5'>
-          <div className='grid grid-cols-3 gap-3'>
+          <div className='grid grid-cols-3 gap-4'>
             {ingredients.map((ingredient) => (
               <IngredientItem
                 key={ingredient.id}
                 imageUrl={ingredient.imageUrl}
                 name={ingredient.name}
                 price={ingredient.price}
-                onClick={onClickAdd}
+                onClick={() => toggleIngredients(ingredient.id)}
+                active={selectedIngredients.has(ingredient.id)}
               />
             ))}
           </div>
         </div>
 
         <Button
-          onClick={onClickAdd}
+          onClick={onClickCart}
           className='h-[55px] px-10 text-base rounded-[18px] w-full mt-10'>
           Добавить в корзину за {totalPrice} ₽
         </Button>
