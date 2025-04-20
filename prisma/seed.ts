@@ -7,22 +7,22 @@ const randomDecimalNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
 };
 
-const generateProductItem = ({
-  productId,
-  pizzaType,
-  size,
-}: {
+interface ProductItemParams {
   productId: number;
   pizzaType?: 1 | 2;
   size?: 25 | 30 | 35;
-}) => {
-  return {
-    productId,
-    price: randomDecimalNumber(190, 600),
-    pizzaType,
-    size,
-  } as Prisma.ProductItemUncheckedCreateInput;
-};
+}
+
+const createProductItem = ({
+  productId,
+  pizzaType,
+  size,
+}: ProductItemParams): Prisma.ProductItemUncheckedCreateInput => ({
+  productId,
+  price: randomDecimalNumber(190, 600),
+  pizzaType,
+  size,
+});
 
 async function up() {
   await prisma.user.createMany({
@@ -84,7 +84,7 @@ async function up() {
     data: {
       name: 'Чоризо фреш',
       imageUrl:
-        'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
+        'https://media.dodostatic.net/image/r:292x292/11ee7d61706d472f9a5d71eb94149304.jpg',
       categoryId: 1,
       ingredients: {
         connect: ingredients.slice(10, 40),
@@ -95,41 +95,27 @@ async function up() {
   await prisma.productItem.createMany({
     data: [
       // Пицца "Пепперони фреш"
-      generateProductItem({ productId: pizza1.id, pizzaType: 1, size: 25 }),
-      generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 35 }),
+      createProductItem({ productId: pizza1.id, pizzaType: 1, size: 25 }),
+      createProductItem({ productId: pizza1.id, pizzaType: 2, size: 30 }),
+      createProductItem({ productId: pizza1.id, pizzaType: 2, size: 35 }),
 
       // Пицца "Сырная"
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 25 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 30 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 35 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 25 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 35 }),
+      createProductItem({ productId: pizza2.id, pizzaType: 1, size: 25 }),
+      createProductItem({ productId: pizza2.id, pizzaType: 1, size: 30 }),
+      createProductItem({ productId: pizza2.id, pizzaType: 1, size: 35 }),
+      createProductItem({ productId: pizza2.id, pizzaType: 2, size: 25 }),
+      createProductItem({ productId: pizza2.id, pizzaType: 2, size: 30 }),
+      createProductItem({ productId: pizza2.id, pizzaType: 2, size: 35 }),
 
       // Пицца "Чоризо фреш"
-      generateProductItem({ productId: pizza3.id, pizzaType: 1, size: 25 }),
-      generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 35 }),
+      createProductItem({ productId: pizza3.id, pizzaType: 1, size: 25 }),
+      createProductItem({ productId: pizza3.id, pizzaType: 2, size: 30 }),
+      createProductItem({ productId: pizza3.id, pizzaType: 2, size: 35 }),
 
       // Остальные продукты
-      generateProductItem({ productId: 1 }),
-      generateProductItem({ productId: 2 }),
-      generateProductItem({ productId: 3 }),
-      generateProductItem({ productId: 4 }),
-      generateProductItem({ productId: 5 }),
-      generateProductItem({ productId: 6 }),
-      generateProductItem({ productId: 7 }),
-      generateProductItem({ productId: 8 }),
-      generateProductItem({ productId: 9 }),
-      generateProductItem({ productId: 10 }),
-      generateProductItem({ productId: 11 }),
-      generateProductItem({ productId: 12 }),
-      generateProductItem({ productId: 13 }),
-      generateProductItem({ productId: 14 }),
-      generateProductItem({ productId: 15 }),
-      generateProductItem({ productId: 16 }),
-      generateProductItem({ productId: 17 }),
+      ...Array.from({ length: 74 }, (_, index) =>
+        createProductItem({ productId: index + 1 })
+      ),
     ],
   });
 

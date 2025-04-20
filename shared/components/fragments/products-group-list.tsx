@@ -5,10 +5,11 @@ import { cn } from '@/shared/lib/utils';
 import { ProductCard } from './product-card';
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/shared/store/category';
+import { ProductWithRelations } from '@/@types/prisma';
 
 interface Props {
   title: string;
-  items: any[];
+  items: ProductWithRelations[];
   listClassName?: string;
   categoryId: number;
   className?: string;
@@ -43,7 +44,7 @@ export const ProductsGroupList: React.FC<Props> = ({
         className='font-bold mb-5'
       />
       <div className={cn('grid grid-cols-3 gap-12', listClassName)}>
-        {items.map((product, i) => (
+        {items.map((product) => (
           <ProductCard
             key={product.id}
             id={product.id}

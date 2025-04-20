@@ -24,11 +24,11 @@ export const ProductCard: React.FC<Props> = ({
   return (
     <div className={cn('group', className)}>
       <Link href={`/product/${id}`}>
-        <div className='flex justify-center p-6 bg-secondary rounded-lg h-[260px]'>
+        <div className='flex justify-center p-6 rounded-lg h-[310px]'>
           <Image
-            width={215}
-            height={215}
-            className='object-cover transition duration-500 ease-in-out group-hover:translate-y-1'
+            width={300}
+            height={300}
+            className='max-w-[300px] h-auto object-cover transition duration-500 ease-in-out group-hover:translate-y-1'
             src={imageUrl}
             alt={name}
             unoptimized={true}

@@ -31,6 +31,26 @@ export const Categories: React.FC<Props> = ({ items, className }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1);
+      const category = items.find((item) => item.name === hash);
+      if (category) {
+        useCategoryStore.setState({ activeId: category.id });
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [items]);
+
+  const handleClick = (id: number, name: string) => {
+    useCategoryStore.setState({ activeId: id });
+    window.location.hash = name;
+  };
+
   return (
     <div
       className={cn(
@@ -54,14 +74,18 @@ export const Categories: React.FC<Props> = ({ items, className }) => {
         initial={{ marginLeft: 0 }}
         animate={{ marginLeft: isScrolled ? '50px' : '0px' }}
         transition={{ duration: 0.3 }}>
-        {items.map(({ name, id }, index) => (
+        {items.map(({ name, id }) => (
           <a
             className={cn(
               'flex items-center font-bold text-sm py-3.5',
               categoryActiveId === id && 'text-primary'
             )}
-            key={index}
-            href={`/#${name}`}>
+            key={id}
+            href={`/#${name}`}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick(id, name);
+            }}>
             <button>{name}</button>
           </a>
         ))}
