@@ -11,17 +11,20 @@ interface ProductItemParams {
   productId: number;
   pizzaType?: 1 | 2;
   size?: 25 | 30 | 35;
+  imageUrl?: string;
 }
 
 const createProductItem = ({
   productId,
   pizzaType,
   size,
+  imageUrl,
 }: ProductItemParams): Prisma.ProductItemUncheckedCreateInput => ({
   productId,
   price: randomDecimalNumber(190, 600),
   pizzaType,
   size,
+  imageUrl,
 });
 
 async function up() {
@@ -60,12 +63,37 @@ async function up() {
     data: {
       name: 'Пепперони фреш',
       imageUrl:
-        'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
+        'https://media.dodostatic.net/image/r:292x292/11ee7d612fc7b7fca5be822752bee1e5.jpg',
       categoryId: 1,
       ingredients: {
         connect: ingredients.slice(0, 5),
       },
     },
+  });
+  await prisma.productItem.createMany({
+    data: [
+      createProductItem({
+        productId: pizza1.id,
+        pizzaType: 1,
+        size: 25,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d612f98bc0ea828957caff9c8ec.jpg',
+      }),
+      createProductItem({
+        productId: pizza1.id,
+        pizzaType: 1,
+        size: 30,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d612fc7b7fca5be822752bee1e5.jpg',
+      }),
+      createProductItem({
+        productId: pizza1.id,
+        pizzaType: 1,
+        size: 35,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d6130241e75b0ab33725248c0d0.jpg',
+      }),
+    ],
   });
 
   const pizza2 = await prisma.product.create({
@@ -80,6 +108,32 @@ async function up() {
     },
   });
 
+  await prisma.productItem.createMany({
+    data: [
+      createProductItem({
+        productId: pizza2.id,
+        pizzaType: 1,
+        size: 25,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d610cf7e265b7c72be5ae757ca7.jpg',
+      }),
+      createProductItem({
+        productId: pizza2.id,
+        pizzaType: 1,
+        size: 30,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d610d2925109ab2e1c92cc5383c.jpg',
+      }),
+      createProductItem({
+        productId: pizza2.id,
+        pizzaType: 1,
+        size: 35,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d610d91679bb519f38c3f45880f.jpg',
+      }),
+    ],
+  });
+
   const pizza3 = await prisma.product.create({
     data: {
       name: 'Чоризо фреш',
@@ -90,6 +144,139 @@ async function up() {
         connect: ingredients.slice(10, 40),
       },
     },
+  });
+  await prisma.productItem.createMany({
+    data: [
+      createProductItem({
+        productId: pizza3.id,
+        pizzaType: 1,
+        size: 25,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d61703f8b47b1e4933820a7d91f.jpg',
+      }),
+      createProductItem({
+        productId: pizza3.id,
+        pizzaType: 1,
+        size: 30,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d61706d472f9a5d71eb94149304.jpg',
+      }),
+      createProductItem({
+        productId: pizza3.id,
+        pizzaType: 1,
+        size: 35,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/11ee7d6170d5f99c89e91a2b3b91d16e.jpg',
+      }),
+    ],
+  });
+  const pizza4 = await prisma.product.create({
+    data: {
+      name: 'Бефстроганов',
+      imageUrl:
+        'https://media.dodostatic.net/image/r:292x292/01953ced168c758399984df8561623a3.jpg',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(10, 40),
+      },
+    },
+  });
+  await prisma.productItem.createMany({
+    data: [
+      createProductItem({
+        productId: pizza4.id,
+        pizzaType: 1,
+        size: 25,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/01953cebc82b777c96bfd4dd1a377eb0.jpg',
+      }),
+      createProductItem({
+        productId: pizza4.id,
+        pizzaType: 1,
+        size: 30,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/01953ced168c758399984df8561623a3.jpg',
+      }),
+      createProductItem({
+        productId: pizza4.id,
+        pizzaType: 1,
+        size: 35,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/01953cece9107770849481f54187a17f.jpg',
+      }),
+    ],
+  });
+  const pizza5 = await prisma.product.create({
+    data: {
+      name: 'Креветки со сладким чили',
+      imageUrl:
+        'https://media.dodostatic.net/image/r:292x292/0194d4fd39bb7352bfa5de2219e88b9b.jpg',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(10, 40),
+      },
+    },
+  });
+  await prisma.productItem.createMany({
+    data: [
+      createProductItem({
+        productId: pizza5.id,
+        pizzaType: 1,
+        size: 25,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/0194d4fd22cb74c1bff42c8552f6e0a0.jpg',
+      }),
+      createProductItem({
+        productId: pizza5.id,
+        pizzaType: 1,
+        size: 30,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/0194d4fd39bb7352bfa5de2219e88b9b.jpg',
+      }),
+      createProductItem({
+        productId: pizza5.id,
+        pizzaType: 1,
+        size: 35,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/0194d4fd4ba4798887defbdb3bc48750.jpg',
+      }),
+    ],
+  });
+  const pizza6 = await prisma.product.create({
+    data: {
+      name: 'Песто',
+      imageUrl:
+        'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.jpg',
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(10, 40),
+      },
+    },
+  });
+  await prisma.productItem.createMany({
+    data: [
+      createProductItem({
+        productId: pizza6.id,
+        pizzaType: 1,
+        size: 25,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/019589a55cd97266afcba81a15dfa1ca.jpg',
+      }),
+      createProductItem({
+        productId: pizza6.id,
+        pizzaType: 1,
+        size: 30,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.jpg',
+      }),
+      createProductItem({
+        productId: pizza6.id,
+        pizzaType: 1,
+        size: 35,
+        imageUrl:
+          'https://media.dodostatic.net/image/r:292x292/019589a596d274ad9deb4c014555a6fa.jpg',
+      }),
+    ],
   });
 
   await prisma.productItem.createMany({
@@ -111,6 +298,21 @@ async function up() {
       createProductItem({ productId: pizza3.id, pizzaType: 1, size: 25 }),
       createProductItem({ productId: pizza3.id, pizzaType: 2, size: 30 }),
       createProductItem({ productId: pizza3.id, pizzaType: 2, size: 35 }),
+
+      // Пицца "Бефстроганов"
+      createProductItem({ productId: pizza4.id, pizzaType: 1, size: 25 }),
+      createProductItem({ productId: pizza4.id, pizzaType: 2, size: 30 }),
+      createProductItem({ productId: pizza4.id, pizzaType: 2, size: 35 }),
+
+      // Пицца "Креветки со сладким чили"
+      createProductItem({ productId: pizza5.id, pizzaType: 1, size: 25 }),
+      createProductItem({ productId: pizza5.id, pizzaType: 2, size: 30 }),
+      createProductItem({ productId: pizza5.id, pizzaType: 2, size: 35 }),
+
+      // Пицца "Песто"
+      createProductItem({ productId: pizza6.id, pizzaType: 1, size: 25 }),
+      createProductItem({ productId: pizza6.id, pizzaType: 2, size: 30 }),
+      createProductItem({ productId: pizza6.id, pizzaType: 2, size: 35 }),
 
       // Остальные продукты
       ...Array.from({ length: 74 }, (_, index) =>
@@ -143,65 +345,6 @@ async function up() {
         connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
       },
     },
-  });
-
-  await prisma.story.createMany({
-    data: [
-      {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/xep/xzh/zmc/cr4gcw0aselwvf628pbmj3j/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3101815496',
-      },
-      {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/km2/9gf/jrn/sb7ls1yj9fe5bwvuwgym73e/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3074015640',
-      },
-      {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/quw/acz/zf5/zu37vankpngyccqvgzbohj1/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=1336215020',
-      },
-      {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/7oc/5nf/ipn/oznceu2ywv82tdlnpwriyrq/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=38903958',
-      },
-      {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/q0t/flg/0ph/xt67uw7kgqe9bag7spwkkyw/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=2941222737',
-      },
-      {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/lza/rsp/2gc/xrar8zdspl4saq4uajmso38/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=4207486284',
-      },
-    ],
-  });
-
-  await prisma.storyItem.createMany({
-    data: [
-      {
-        storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/dd/yj/sx/oqx9feuljibke3mknab7ilb35t.webp?k=IgAAAAAAAAAE',
-      },
-      {
-        storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/jv/sb/fh/io7c5zarojdm7eus0trn7czdet.webp?k=IgAAAAAAAAAE',
-      },
-      {
-        storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/ts/p9/vq/zktyxdxnjqbzufonxd8ffk44cb.webp?k=IgAAAAAAAAAE',
-      },
-      {
-        storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/ur/uq/le/9ufzwtpdjeekidqq04alfnxvu2.webp?k=IgAAAAAAAAAE',
-      },
-      {
-        storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/sy/vl/c7/uyqzmdojadcbw7o0a35ojxlcul.webp?k=IgAAAAAAAAAE',
-      },
-    ],
   });
 }
 

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/shared/lib/utils';
 import { Dialog, DialogContent } from '@/shared/components/ui/dialog';
-
 import { useRouter } from 'next/navigation';
 import { ChooseProductForm } from '../choose-product-form';
 import { ChoosePizzaForm } from '../choose-pizza-form';
@@ -18,12 +17,12 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const firstItem = product.items[0];
-  const isPizzaForm = Boolean(firstItem.pizzaType);
+  const isPizzaForm = Boolean(firstItem?.pizzaType);
 
   useEffect(() => {
     if (product) {
       setIsOpen(true);
-      router.push(`/product/${product.id}`); // модальное окно открывалось но url при этом не обновлялся, это решение выглядит как костыль, позже исправлю
+      router.push(`/product/${product.id}`);
     }
   }, [product, router]);
 
@@ -38,15 +37,15 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
       onOpenChange={handleClose}>
       <DialogContent
         className={cn(
-          'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden',
+          'p-0 w-[1060px] max-w-[1060px] min-h-[600px] bg-white overflow-hidden',
           className
         )}>
         {isPizzaForm ? (
           <ChoosePizzaForm
-            imageUrl={product.imageUrl}
             name={product.name}
             ingredients={product.ingredients}
             items={product.items}
+            defaultImageUrl={product} // добавлено для дефолтного изображения если нет разных изображений для размеров, передается весь продукт, сделать более красиво
           />
         ) : (
           <ChooseProductForm

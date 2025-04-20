@@ -45,6 +45,7 @@ export const Categories: React.FC<Props> = ({ items, className }) => {
 
   const handleClick = (id: number, name: string) => {
     useCategoryStore.setState({ activeId: id });
+    window.location.hash = name;
     const element = document.getElementById(name);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
