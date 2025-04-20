@@ -18,7 +18,7 @@ export const PizzaImage: React.FC<Props> = ({ imageUrl, size, className }) => {
         src={imageUrl}
         alt='pizza'
         className={cn(
-          'relative left-2 top-2 transition-all z-10 duration-300',
+          'relative left-2 top-2 transition-all z-10 duration-300 rounded-full',
           {
             'w-[300px] h-[300px]': size === 25,
             'w-[400px] h-[400px]': size === 30,

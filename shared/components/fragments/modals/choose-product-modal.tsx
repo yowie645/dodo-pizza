@@ -46,6 +46,9 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
             ingredients={product.ingredients}
             items={product.items}
             defaultImageUrl={product} // добавлено для дефолтного изображения если нет разных изображений для размеров, передается весь продукт, сделать более красиво
+            onClickAdd={function (): void {
+              throw new Error('Function not implemented.');
+            }}
           />
         ) : (
           <ChooseProductForm
