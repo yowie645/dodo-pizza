@@ -10,14 +10,14 @@ type Variant = {
 interface Props {
   items: readonly Variant[];
   onClick?: (value: Variant['value']) => void;
-  selectedValue?: Variant['value'];
+  value?: Variant['value'];
   className?: string;
 }
 
 export const GroupVariants: React.FC<Props> = ({
   items,
   onClick,
-  selectedValue,
+  value,
   className,
 }) => {
   return (
@@ -33,7 +33,7 @@ export const GroupVariants: React.FC<Props> = ({
           className={cn(
             'flex items-center justify-center cursor-pointer px-5 flex-1 h-[30px] rounded-3xl transition-all duration-500 text-sm',
             {
-              'bg-white shadow': item.value === selectedValue,
+              'bg-white shadow': item.value === value,
               'text-gray-500 opacity-50 cursor-not-allowed': item.disabled,
             }
           )}>
