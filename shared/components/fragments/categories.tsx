@@ -3,7 +3,7 @@
 import { cn } from '@/shared/lib/utils';
 import { useCategoryStore } from '@/shared/store/category';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Category } from '@prisma/client';
 
@@ -15,41 +15,78 @@ interface Props {
 export const Categories: React.FC<Props> = ({ items, className }) => {
   const categoryActiveId = useCategoryStore((state) => state.activeId);
   const [isScrolled, setIsScrolled] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const handleScroll = () => {
-    if (window.scrollY > 262) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 262);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
+
+  const handleHashChange = useCallback(() => {
+    const hash = window.location.hash.substring(1);
+    const category = items.find((item) => item.name === hash);
+    if (category) {
+      useCategoryStore.setState({ activeId: category.id });
+    }
+  }, [items]);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.substring(1);
-      const category = items.find((item) => item.name === hash);
-      if (category) {
-        useCategoryStore.setState({ activeId: category.id });
-      }
-    };
-
     window.addEventListener('hashchange', handleHashChange);
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, [items]);
+  }, [handleHashChange]);
 
   const handleClick = (id: number, name: string) => {
     useCategoryStore.setState({ activeId: id });
-    window.location.hash = name;
+    const element = document.getElementById(name);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const topOffset = 60;
+      window.scrollBy({
+        top: -topOffset,
+        behavior: 'smooth',
+      });
+    }
   };
+
+  useEffect(() => {
+    const elements = items.map((item) => document.getElementById(item.name));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const category = items.find(
+              (item) => item.name === entry.target.id
+            );
+            if (category) {
+              useCategoryStore.setState({ activeId: category.id });
+            }
+          }
+        });
+      },
+      { rootMargin: '0px 0px -90% 0px' }
+    );
+
+    elements.forEach((element) => {
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    observerRef.current = observer;
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [items]);
 
   return (
     <div
