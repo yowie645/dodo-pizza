@@ -288,9 +288,6 @@ async function up() {
 
       // Пицца "Сырная"
       createProductItem({ productId: pizza2.id, pizzaType: 1, size: 25 }),
-      createProductItem({ productId: pizza2.id, pizzaType: 1, size: 30 }),
-      createProductItem({ productId: pizza2.id, pizzaType: 1, size: 35 }),
-      createProductItem({ productId: pizza2.id, pizzaType: 2, size: 25 }),
       createProductItem({ productId: pizza2.id, pizzaType: 2, size: 30 }),
       createProductItem({ productId: pizza2.id, pizzaType: 2, size: 35 }),
 

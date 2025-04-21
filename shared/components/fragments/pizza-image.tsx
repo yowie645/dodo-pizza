@@ -3,11 +3,14 @@ import React from 'react';
 
 interface Props {
   className?: string;
-  imageUrl: string;
+  imageUrl: string | null;
   size: 25 | 30 | 35;
 }
 
 export const PizzaImage: React.FC<Props> = ({ imageUrl, size, className }) => {
+  const actualImageUrl =
+    imageUrl ||
+    'https://lastfm.freetls.fastly.net/i/u/ar0/c7c4efb56075eb76560cfe6914fce004.png';
   return (
     <div
       className={cn(
@@ -15,7 +18,7 @@ export const PizzaImage: React.FC<Props> = ({ imageUrl, size, className }) => {
         className
       )}>
       <img
-        src={imageUrl}
+        src={actualImageUrl}
         alt='pizza'
         className={cn(
           'relative left-2 top-2 transition-all z-10 duration-300 rounded-full',
