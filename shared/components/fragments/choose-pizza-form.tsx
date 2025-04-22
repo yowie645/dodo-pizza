@@ -5,13 +5,20 @@ import { Title } from './title';
 import { Button } from '../ui';
 import { PizzaImage } from './pizza-image';
 import { GroupVariants } from './group-variants';
-import { pizzaSizes, pizzaTypes } from '@/shared/constants/pizza';
-import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
 import { ProductItem } from '@prisma/client';
 import { IngredientItem } from './ingredient-item';
 import { Ingredient } from '@prisma/client';
 import { useSet } from 'react-use';
-import { calcTotalPizzaPrice } from '@/shared/lib';
+import {
+  calcTotalPizzaPrice,
+  getAvailablePizzaSizes,
+  getAvailablePizzaTypes,
+  getAvailableTypesForSize,
+  getCurrentPizzaItem,
+  getPizzaDetailsText,
+  usePizzaTypeEffect,
+} from '@/shared/lib';
+import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
 
 interface Props {
   name: string;
@@ -34,74 +41,51 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 }) => {
   const [size, setSize] = React.useState<PizzaSize>(30);
   const [type, setType] = React.useState<PizzaType>(1);
-
   const [selectedIngredients, { toggle: toggleIngredients }] = useSet<number>(
     new Set([])
   );
 
-  // Получаем текущий выбранный item по размеру и типу теста
-  const currentItem = items.find(
-    (item) => item.size === size && item.pizzaType === type
-  ) || {
-    imageUrl: defaultImageUrl.imageUrl,
-    size: 30,
-    pizzaType: 1,
-    price: 0,
-  };
+  // Получаем доступные типы теста для выбранного размера
+  const availableTypesForSize = React.useMemo(
+    () => getAvailableTypesForSize(items, size),
+    [items, size]
+  );
 
-  // Получаем все доступные типы теста для текущего размера
-  const availableTypesForSize = React.useMemo(() => {
-    const types = new Set<PizzaType>();
-    items.forEach((item) => {
-      if (
-        item.size === size &&
-        (item.pizzaType === 1 || item.pizzaType === 2)
-      ) {
-        types.add(item.pizzaType);
-      }
-    });
-    return Array.from(types);
-  }, [items, size]);
+  // Получаем текущий выбранный item
+  const currentItem = getCurrentPizzaItem(
+    items,
+    size,
+    type,
+    defaultImageUrl.imageUrl
+  );
 
+  // Проверяем доступен ли текущий тип теста
   const isCurrentTypeAvailable = availableTypesForSize.includes(type);
 
-  React.useEffect(() => {
-    if (!isCurrentTypeAvailable && availableTypesForSize.length > 0) {
-      setType(availableTypesForSize[0]);
-    }
-  }, [isCurrentTypeAvailable, availableTypesForSize]);
+  // Эффект для автоматического выбора доступного типа теста
+  usePizzaTypeEffect(isCurrentTypeAvailable, availableTypesForSize, setType);
 
+  // Получаем доступные размеры и типы пиццы
+  const availablePizzaSizes = getAvailablePizzaSizes(items);
+  const availablePizzaTypes = getAvailablePizzaTypes(
+    items,
+    size,
+    availableTypesForSize
+  );
+
+  // Рассчитываем итоговую цену
   const totalPrice = calcTotalPizzaPrice(
     ingredients,
     selectedIngredients,
     currentItem.price
   );
 
-  const textDetails = `${size} см, ${
-    type === 1 ? 'традиционное' : 'тонкое'
-  } тесто`;
+  // Генерируем текст с деталями пиццы
+  const textDetails = getPizzaDetailsText(size, type);
 
   const handleClickAdd = () => {
-    onClickAddCart?.();
-    console.log({ size, type, ingredients: selectedIngredients });
+    onClickAddCart();
   };
-
-  const availablePizzaSizes = pizzaSizes.map((item) => ({
-    name: item.name,
-    value: item.value,
-    disabled: !items.some((pizza) => pizza.size === Number(item.value)),
-  }));
-
-  const availablePizzaTypes = pizzaTypes.map((item) => {
-    const pizzaTypeValue = Number(item.value) as PizzaType;
-    return {
-      name: item.name,
-      value: item.value,
-      disabled:
-        (size === 25 && pizzaTypeValue === 2) ||
-        !availableTypesForSize.includes(pizzaTypeValue),
-    };
-  });
 
   return (
     <div className={cn(className, 'flex flex-1')}>
