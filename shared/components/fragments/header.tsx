@@ -46,7 +46,6 @@ export const Header: React.FC<Props> = ({ className }) => {
             <User size='16px' />
             Войти
           </Button>
-          <div></div>
         </div>
       </Container>
     </header>
