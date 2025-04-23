@@ -5,6 +5,7 @@ import { Title } from './title';
 import { Button } from '../ui';
 import { Plus } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
+import { ingredients } from '@/prisma/constants';
 
 interface Props {
   id: number;
@@ -40,10 +41,7 @@ export const ProductCard: React.FC<Props> = ({
           size='sm'
         />
         <p className='text-sm text-gray-400'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, odit
-          officia consequatur harum expedita suscipit nam aliquam earum, quas
-          repellendus odio ad cupiditate. Nobis consequuntur aut tenetur optio
-          provident quia?
+          {ingredients.map((ingredient) => ingredient.name).join(', ')}
         </p>
         <div className='flex justify-between items-center mt-4'>
           <span className='text-xl'>от {price}</span>
