@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Sheet,
@@ -11,6 +12,8 @@ import {
 import Link from 'next/link';
 import { Button } from '../ui';
 import { ArrowRight } from 'lucide-react';
+import { CartDrawerItem } from './cart-drawer-item';
+import { getCartItemDetails } from '@/shared/lib';
 
 interface Props {
   className?: string;
@@ -26,11 +29,118 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
       <SheetContent className='flex flex-col justify-between pb-0 bg-[#f4f1ee]'>
         <SheetHeader>
           <SheetTitle>
-            В корзине <span className='font-bold'>3 товара</span>
+            1 товар <span className='font-bold'>на 919 ₽</span>
           </SheetTitle>
         </SheetHeader>
 
-        {/* Items */}
+        <div className='-mx-6 mt-5 overflow-auto flex-1 scrollbar'>
+          <div className='mb-2'>
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+          </div>
+        </div>
 
         <SheetFooter className='-mx-6 bg-white p-8'>
           <div className='w-full'>

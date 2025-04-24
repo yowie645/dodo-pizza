@@ -20,7 +20,7 @@ export default async function ProductPage({
       <div className='flex flex-1'>
         <PizzaImage
           imageUrl={product.imageUrl}
-          size={40}
+          size={35}
           className=''
         />
         <div className='w-[490px] bg-[#fcfcfc] p-7'>

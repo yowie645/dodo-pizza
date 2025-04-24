@@ -45,13 +45,11 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     new Set([])
   );
 
-  // Получаем доступные типы теста для выбранного размера
   const availableTypesForSize = React.useMemo(
     () => getAvailableTypesForSize(items, size),
     [items, size]
   );
 
-  // Получаем текущий выбранный item
   const currentItem = getCurrentPizzaItem(
     items,
     size,
@@ -59,13 +57,10 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     defaultImageUrl.imageUrl
   );
 
-  // Проверяем доступен ли текущий тип теста
   const isCurrentTypeAvailable = availableTypesForSize.includes(type);
 
-  // Эффект для автоматического выбора доступного типа теста
   usePizzaTypeEffect(isCurrentTypeAvailable, availableTypesForSize, setType);
 
-  // Получаем доступные размеры и типы пиццы
   const availablePizzaSizes = getAvailablePizzaSizes(items);
   const availablePizzaTypes = getAvailablePizzaTypes(
     items,
@@ -73,14 +68,12 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     availableTypesForSize
   );
 
-  // Рассчитываем итоговую цену
   const totalPrice = calcTotalPizzaPrice(
     ingredients,
     selectedIngredients,
     currentItem.price
   );
 
-  // Генерируем текст с деталями пиццы
   const textDetails = getPizzaDetailsText(size, type);
 
   const handleClickAdd = () => {

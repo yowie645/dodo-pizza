@@ -1,19 +1,9 @@
 export const categories = [
-  {
-    name: 'Пиццы',
-  },
-  {
-    name: 'Комбо',
-  },
-  {
-    name: 'Закуски',
-  },
-  {
-    name: 'Коктейли',
-  },
-  {
-    name: 'Кофе',
-  },
+  { id: 1, name: 'Пиццы' },
+  { id: 2, name: 'Комбо' },
+  { id: 3, name: 'Закуски' },
+  { id: 4, name: 'Коктейли' },
+  { id: 5, name: 'Кофе' },
 ];
 
 export const ingredients = [
