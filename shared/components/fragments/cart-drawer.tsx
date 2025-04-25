@@ -48,6 +48,136 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
               price={419}
               quantity={1}
             />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
+            <CartDrawerItem
+              id={1}
+              imageUrl={
+                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
+              }
+              details={getCartItemDetails(2, 30, [
+                { name: 'ципленок' },
+                { name: 'сыр' },
+              ])}
+              name={'Зокс пидорокс'}
+              price={419}
+              quantity={1}
+            />
           </div>
         </div>
 
