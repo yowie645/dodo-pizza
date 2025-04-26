@@ -6,3 +6,4 @@ export { getPizzaDetailsText } from './get-pizza-details-text';
 export { getCurrentPizzaItem } from './use-current-pizza-item';
 export { usePizzaTypeEffect } from './use-pizza-type-effect';
 export { getCartItemDetails } from './get-cart-items-details';
+export { getCartDetails } from './get-cart-details';
