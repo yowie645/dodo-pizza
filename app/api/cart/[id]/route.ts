@@ -1,3 +1,5 @@
+import { prisma } from '@/prisma/prisma-client';
+import { error } from 'console';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function PATCH(
@@ -5,12 +7,27 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const id = Number(params.id);
     const body = await req.json();
+    const token = req.cookies.get('getToken')?.value;
+
+    if (!token) {
+      return NextResponse.json({ error: 'Cart token not found' });
+    }
+
+    const cartItem = await prisma.cartItem.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    if (!cartItem) {
+      return NextResponse.json({ error: 'Cart item not found' });
+    }
   } catch (error) {
-    console.log(error);
+    console.log('[CART_PATCH] Server error', error);
     return NextResponse.json(
-      { message: '[CART_PATCH] Server error' },
+      { message: 'Не удалось обновить корзину' },
       { status: 500 }
     );
   }
