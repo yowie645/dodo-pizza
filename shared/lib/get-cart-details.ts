@@ -2,6 +2,7 @@ import { CartDTO } from '../services/dto/cart-dto';
 import { calcItemTotalPrice } from './calc-cart-item-total-price';
 
 export type CartStateItem = {
+  productItem: any;
   id: number;
   quantity: number;
   name: string;

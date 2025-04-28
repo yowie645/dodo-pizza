@@ -14,6 +14,7 @@ import { Button } from '../ui';
 import { ArrowRight } from 'lucide-react';
 import { CartDrawerItem } from './cart-drawer-item';
 import { getCartItemDetails } from '@/shared/lib';
+import { useCartStore } from '@/shared/store';
 
 interface Props {
   className?: string;
@@ -23,161 +24,48 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   className,
 }) => {
+  const { totalAmount, fetchCartItems, items } = useCartStore((state) => ({
+    totalAmount: state.totalAmount,
+    fetchCartItems: state.fetchCartItems,
+    items: state.items,
+  }));
+
+  React.useEffect(() => {
+    fetchCartItems();
+  }, [fetchCartItems]);
+
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className='flex flex-col justify-between pb-0 bg-[#f4f1ee]'>
         <SheetHeader>
           <SheetTitle>
-            1 товар <span className='font-bold'>на 919 ₽</span>
+            {items.length} товар
+            <span className='font-bold'>на {totalAmount} ₽</span>
           </SheetTitle>
         </SheetHeader>
 
         <div className='-mx-6 mt-5 overflow-auto flex-1 scrollbar'>
           <div className='mb-2'>
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
-            <CartDrawerItem
-              id={1}
-              imageUrl={
-                'https://media.dodostatic.net/image/r:292x292/019589a573477186898528944fd881a2.avif'
-              }
-              details={getCartItemDetails(2, 30, [
-                { name: 'ципленок' },
-                { name: 'сыр' },
-              ])}
-              name={'Зокс пидорокс'}
-              price={419}
-              quantity={1}
-            />
+            {items.map((item) => (
+              <CartDrawerItem
+                key={item.id}
+                id={item.id}
+                imageUrl={item.productItem?.product?.imageUrl}
+                details={
+                  item.pizzaSize && item.pizzaType
+                    ? getCartItemDetails(
+                        item.ingredients,
+                        item.pizzaSize,
+                        item.pizzaType
+                      )
+                    : ''
+                }
+                name={item.name}
+                price={item.price}
+                quantity={item.quantity}
+              />
+            ))}
           </div>
         </div>
 
@@ -188,7 +76,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
                 Итог
                 <div className='flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2'></div>
               </span>
-              <span className='font-bold text-lg'>520 ₽</span>
+              <span className='font-bold text-lg'>{totalAmount} ₽</span>
             </div>
             <Link href={'/cart'}>
               <Button
